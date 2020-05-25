@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+    <head>
+        <title>Tombola di Michele Farneti</title>
+        <script>
+
+            //variabili globali
+            var matrice = [];
+            var usciti = [];
+
+
+            function trovaRiga(A)
+            {
+               var B;
+               B=A/10;
+               return  Math.floor(B);
+               
+            }
+
+            function trovaColonna(A)
+            {
+                var B;
+                var decina = trovaRiga(A);
+                B=(A-decina*10)-1;
+                if(A%10==0)
+                {
+                    B=9;
+                }
+                return B;
+            }
+        
+
+        //Funzione per riempire la matrice
+        function PosizionaValoriMatrice()
+            {
+                //Numero che sarà incrementato e inserito nella matrice
+                var numstamp=1;
+
+                // Creazione matrice bidimensionaale
+                for(var i = 0; i < 10; i++)
+                    {
+                         matrice[i] = new Array(10);
+                         usciti[i] = new Array(10);
+                    }
+
+                //Ciclo di inserimento dei numeri nella matrice
+                for(var r = 0; r < 10; r++)
+                    {
+
+                        for(var c = 0; c < 10; c++)
+                            {
+                                 matrice[r][c] = numstamp;
+                                 usciti[r][c] = false;
+                                 numstamp=numstamp+1;
+                            }
+                    }
+
+                 
+                VisualizzaCampo();
+                
+            }
+
+
+        function VisualizzaCampo()
+                    {
+                        for(var r = 0; r < 9; r++)
+                            {
+                                 for(var c = 0; c < 10; c++)
+                                     {
+                                        document.getElementById("tblCampo").rows[r].cells[c].innerHTML = "<i>" + matrice[r][c] + "</i>";
+                                     }
+                            }
+                    }
+
+                    
+            function GeneraNumero()
+            {
+                var numero = 0;
+                var trovato = true;
+
+                
+				// continua a generare numeri casuali fino a che il numero generato non è già uscito
+                while (trovato==true)
+                {
+                    numero = valoreCasuale(1,90);
+
+                    var riga = trovaRiga(numero);
+                    
+                    var colonna = trovaColonna(numero);
+
+                    document.getElementById("txtRiga").value = riga;
+                    document.getElementById("txtColonna").value = colonna;
+
+                    if(usciti[riga][colonna]==true)
+                    {
+                        trovato = true;
+                        alert('Numero già uscito :'+numero);
+                        
+                    }
+                    else
+                    {
+                        trovato=false;
+                        
+                    }
+                }
+                
+                
+                document.getElementById("txtNumero").value = numero;
+				usciti[riga][colonna] = true;
+
+                // visualizza il nuemro generato 
+                VisualizzaNumero();
+            }    
+        
+            function VisualizzaNumero()
+            {
+                var numero = parseInt(document.getElementById("txtNumero").value);
+                var riga = trovaRiga(numero);
+                var colonna = trovaColonna(numero);
+                document.getElementById("tblCampo").rows[riga].cells[colonna].innerHTML = "<u><b>"+ document.getElementById("tblCampo").rows[riga].cells[colonna].innerHTML + "<b></u>";
+                
+            }
+
+        function valoreCasuale(iniziale,finale)
+                    {
+                        return Math.floor(Math.random()*(finale-iniziale+1)+iniziale);
+                    }
+         </script>
+ </head>
+ <body>
+    <h1>TOMBOLA di Michele Farneti</h1>
+    <table border="1">
+        <tr>
+          <th rowspan="3">
+              <!--stampa della tabella-->
+              <table border="1" cellpadding="6" id="tblCampo">
+                <script>
+
+                for(var r = 0; r < 9; r++)
+                {
+                    document.write("<tr>");
+
+                    for(var c = 0; c <10; c++)
+                    {
+                        document.write("<td></td>");
+                    }
+                    document.write("</tr>");
+                }
+                </script>
+            </table>
+          </th>
+          <th>
+            <button type="button" id="btnGenera"  onclick="PosizionaValoriMatrice()">Genera tombola</button>
+          </th>
+          <th>
+            <button type="button" onclick="GeneraNumero()">Visualizza numero</button>  
+          </th>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <center>Numero: <input type="text" name = "txtNumero" value="0" id="txtNumero"></center>
+          </td>
+        </tr>
+        <tr>
+          <td>Riga: <input type="text" name = "txtRiga" value="0" id="txtRiga"></td>
+          <td>Colonna: <input type="text" name = "txtColonna" value="0" id="txtColonna"></td>
+        </tr>
+      </table>  
+         
+               <br><br>
+    
+ </body>
+</html>
