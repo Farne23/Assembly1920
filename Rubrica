@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <script>
+            var listanomi = new Array(10);                       
+            var listacognomi = new Array(10) ;
+            var listanumeri = new Array(10);
+            var listasimpatia = new Array(10);
+            var ncontatti = -1;
+            var i;
+            var nome;
+
+            
+
+            function Aggiungi()
+            {
+                ncontatti =ncontatti+1;
+                listanomi[ncontatti] = document.getElementById('Nome').value;
+                listacognomi[ncontatti]= document.getElementById('Cognome').value;
+                listanumeri[ncontatti] = document.getElementById('Numero').value;
+                listasimpatia[ncontatti] = parseInt(document.getElementById('Simpatia').value);
+            }
+
+           function Cercanome()
+           {
+            
+             nome = document.getElementById('Nome').value;
+             for(i=0;i<=ncontatti;i++)
+             {
+                 if (listanomi[i]==nome)
+             {
+                 alert(listacognomi[i]+"  "+listanomi[i]+" Numero:"+ listanumeri[i]+"  Livello simpatia:"+listasimpatia[i]);
+                 
+                
+             }
+             }
+           }
+
+           function Cercasimp()
+           {
+               
+             for(i=0;i<=ncontatti;i++)
+             {
+                 if (listasimpatia[i]>2)
+             {
+                 alert(listacognomi[i]+"  "+listanomi[i]+" Numero:"+ listanumeri[i]+"  Livello simpatia:"+listasimpatia[i]);
+                 
+                
+             }
+             }
+           }
+        </script>
+    </head>
+    <body>
+        <h1>Rubrica</h1>
+        <form>
+           
+            Nome <input type="text" id="Nome" ><br>
+            Cognome <input type="text" id="Cognome" ><br>
+            Numero <input type="text" id="Numero" ><br>
+            Simpatia <select id="Simpatia">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select><br>
+            <button type="button" onclick="Aggiungi()">Aggiungi contatto</button>
+            <button type="button" onclick="Cercanome()">Cerca per nome</button>
+            <button type="button" onclick="Cercasimp()">Cerca simpatici</button>
+            
+        </form>
+    </body>
+</html>
