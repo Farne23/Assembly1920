@@ -1,0 +1,125 @@
+<html>
+<head>
+<script>
+    var giorno=prompt("Inserisci il giorno (da 1 a 7)");
+    
+    var tot=0;
+    var ptot=0;
+    var max=0;
+    var min=1000000000000000000000000000000;
+    var sconto=0;
+    var bol =0;
+    
+function calcola() 
+{
+
+		
+		
+			var a=(form1.txtqta.value);
+            var b=(form1.txtprezzo.value);
+            
+			 ptot= a*b;
+             tot=tot+ptot;
+
+             if(b>max)
+             {
+                 max=b;
+             }
+
+             if(b<min)
+             {
+                 min=b;
+             }
+             
+            
+			
+					
+}
+
+
+function fine()
+
+{
+   
+    var bol=prompt("Inserisci il numero di bollini residui");
+     if(giorno==3)
+     {
+         if (tot<=2)
+         {
+             bol=bol+1
+         }
+         else{
+             if(tot<=5)
+             {bol=bol+2}
+             else{
+                 if(tot<=15)
+                 {bol=bol+3}
+                 else{if(tot<=50)
+                 {bol=bol+4} else {bol=bol+5}}
+             }
+         }
+     }
+    
+
+     if(bol == 1)
+     {sconto=0.5;}
+     else{if(bol == 2)
+     {sconto=0.8;}
+     else{sconto = bol*0.75;}}
+
+     sconto=tot-sconto;
+
+
+    document.getElementById('stampatot').innerHTML =  tot ;
+    document.getElementById('stampas').innerHTML =  sconto ;
+    document.getElementById('stampamax').innerHTML =  max ;
+    document.getElementById('stampamin').innerHTML =  min ;
+    }
+
+
+
+	
+</script>
+</head>
+<body>
+	<h2>Calcolatrice di prezzo totale</h2>
+<left>
+<form action="" name= "form1" method="get">
+	Quantità=<input type =text name="txtqta">
+	Prezzo=<input type =text name="txtprezzo">
+    <input type =button  value="Aggiungi" onclick = " calcola()">
+    <input type =button  value="Fine" onclick = " fine()">
+	
+</left>
+<br>
+<br>
+<table>
+
+
+		<tr>
+            <td>TOTALE  </td>
+            <td>
+                <p id ="stampatot"></p>
+            </td>
+        </tr>
+        <tr>
+                <td>PREZZO SCONTATO  </td>
+                <td>
+                    <p id ="stampas"></p>
+                </td>
+            </tr>
+        <tr>
+            <td>PREZZO PIU' ALTO</td>
+            <td>
+                <p id ="stampamax"></p>
+             </td>
+        </tr>
+        <tr>
+                <td>PREZZO PIU' BASSO</td>
+            <td>
+                 <p id ="stampamin"></p>
+            </td>
+        </tr>
+</table>
+</form>
+</body>
