@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <script>
+           var sommaPeso=0;
+            var sommaQuantita=0;
+            var sommaPrezzo=0;
+            var media=0;
+            var prezzo
+            var n=0;
+            var min=0;
+            var mag=0;
+            var Maxqt;
+            var Maxps;
+            function Calcolo()
+            {
+            n=n+1;
+             quantita = parseInt(document.getElementById('Quantita').value);
+             peso = parseInt(document.getElementById('Peso').value);
+             prezzo = parseInt(document.getElementById('Prezzo').value);
+             Maxqt = parseInt(document.getElementById('Maxqta').value);
+             Maxps = parseInt(document.getElementById('MaxP').value);
+
+             sommaPeso = sommaPeso + peso ;
+             sommaQuantita = sommaQuantita + quantita;
+             sommaPrezzo=sommaPrezzo+prezzo;
+             media= sommaPrezzo/n;
+
+
+             if(n==1)
+             {
+                min=prezzo;
+                mag=prezzo;
+            }
+
+            if(prezzo>mag)
+            {mag=prezzo;}
+            if(prezzo<min)
+            {min=prezzo;}
+
+
+            if(sommaPeso>Maxps || sommaQuantita>Maxqt)
+            {alert("Limite massimo raggiunto")}
+          
+
+
+
+             document.getElementById('Sp').value = sommaPeso;
+             document.getElementById('Sq').value = sommaQuantita;
+             document.getElementById('Spr').value = sommaPrezzo;
+             document.getElementById('M').value = media;
+            
+             document.getElementById('Minore').value = min;
+             document.getElementById('Maggiore').value = mag;
+
+            
+
+            }    
+        </script>
+    </head>
+    <body>
+        <h2>Calcolatrice per slitta di BABBO NATALE</h2>
+        
+        <form>
+               Soglia quantità: <input type="text" id="Maxqta" value="0"><br>
+                Soglia peso: <input type="text" id="MaxP" value="0"><br>           
+            Quantità: <input type="text" id="Quantita" value="0"><br>
+            Peso: <input type="text" id="Peso" value="0"><br>
+            Prezzo: <input type="text" id="Prezzo" value="0"><br>
+            <button type="button" onclick="Calcolo()">Aggiungi</button> <button type="reset">reset</button><br>
+           Somma del peso:<input type="text"  name="Sp" id="Sp" disabled><br>
+           Somma della quantità:<input type="text"  id="Sq" disabled><br>
+            Somma del prezzo:<input type="text"  id="Spr" disabled><br>
+            Prezzo medio:<input type="text"  id="M" disabled><br>
+            Prezzo maggiore:<input type="text"  id="Maggiore" disabled><br>         
+            Prezzo minore:<input type="text"  id="Minore" disabled><br>  
+        </form>
+    </body>
+</html>
